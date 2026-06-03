@@ -1,3 +1,4 @@
 name = "earnova-earn-while-you-learn"
+compatibility_date = "2025-09-24"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "dist/client"
-compatibility_date = "2024-11-01"
