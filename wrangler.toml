@@ -1,7 +1,4 @@
 name = "earnova-earn-while-you-learn"
 compatibility_date = "2025-09-24"
 compatibility_flags = ["nodejs_compat"]
-
-[pages_build_config]
-build_command = "npm run build"
-destination_dir = "dist/client"
+pages_build_output_dir = "dist/client"
