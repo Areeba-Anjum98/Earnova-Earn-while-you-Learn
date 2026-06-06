@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Clock, DollarSign, Grid3x3, List, Filter, Star } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
+import { API_BASE } from "@/lib/config";
 
 type Job = {
   _id: string;
@@ -39,7 +40,7 @@ export function JobListings({ jobs, loading }: { jobs: Job[]; loading: boolean }
 
     try {
       // ✅ FIX: userId token se aata hai backend pe, yahan nahi bhejte
-      const res = await fetch("http://localhost:3001/api/application", {
+      const res = await fetch(`${API_BASE}/application`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,6 @@
-const BASE = `https://earnova-earn-while-you-learn-production.up.railway.app/api`;
+import { API_BASE } from "@/lib/config";
+
+const BASE = API_BASE;
 
 // ✅ FIX: Helper to get auth headers
 const authHeaders = () => {

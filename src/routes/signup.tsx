@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { API_BASE } from "@/lib/config";
 import { Mail, Lock, User, ArrowRight, Briefcase, GraduationCap } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 
@@ -43,7 +44,7 @@ function SignupPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/api/auth/register", {
+      const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, role }),

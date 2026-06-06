@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { API_BASE } from "@/lib/config";
 import {
   Briefcase,
   Users,
@@ -64,7 +65,7 @@ function EmployerDashboard() {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:3001/api/notifications/unread/count", {
+      const res = await fetch(`${API_BASE}/notifications/unread/count`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -79,7 +80,7 @@ function EmployerDashboard() {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:3001/api/notifications", {
+      const res = await fetch(`${API_BASE}/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -94,7 +95,7 @@ function EmployerDashboard() {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:3001/api/notifications/all/read", {
+      const res = await fetch(`${API_BASE}/notifications/all/read`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -129,7 +130,7 @@ function EmployerDashboard() {
     const employerId = u._id || u.id;
 
     // Load jobs created by this employer
-    fetch(`http://localhost:3001/api/jobs/employer/${employerId}`, {
+    fetch(`${API_BASE}/jobs/employer/${employerId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -137,7 +138,7 @@ function EmployerDashboard() {
       .catch(console.error);
 
     // Load pending sessions for approval
-    fetch(`http://localhost:3001/api/work/pending/employer/${employerId}`, {
+    fetch(`${API_BASE}/work/pending/employer/${employerId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -145,7 +146,7 @@ function EmployerDashboard() {
       .catch(console.error);
 
     // Load applications for employer's jobs
-    fetch(`http://localhost:3001/api/jobs/employer/${employerId}/applications`, {
+    fetch(`${API_BASE}/jobs/employer/${employerId}/applications`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -189,7 +190,7 @@ function EmployerDashboard() {
     const token = localStorage.getItem("token");
     setPosting(true);
     try {
-      const res = await fetch("http://localhost:3001/api/jobs", {
+      const res = await fetch(`${API_BASE}/jobs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -239,7 +240,7 @@ function EmployerDashboard() {
   const handleApproveSession = async (sessionId: string) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch("http://localhost:3001/api/jobs/approve-session", {
+      const res = await fetch(`${API_BASE}/jobs/approve-session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -262,7 +263,7 @@ function EmployerDashboard() {
   const handleAcceptApplication = async (applicationId: string) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch("http://localhost:3001/api/jobs/accept", {
+      const res = await fetch(`${API_BASE}/jobs/accept`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -290,7 +291,7 @@ function EmployerDashboard() {
 
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:3001/api/jobs/${jobId}`, {
+      const res = await fetch(`${API_BASE}/jobs/${jobId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -311,7 +312,7 @@ function EmployerDashboard() {
   const handleRejectApplication = async (applicationId: string) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch("http://localhost:3001/api/jobs/reject", {
+      const res = await fetch(`${API_BASE}/jobs/reject`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

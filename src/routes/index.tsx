@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { API_BASE } from "@/lib/config";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
@@ -39,7 +40,7 @@ function Index() {
     const fetchJobs = async () => {
       try {
         setLoadingJobs(true);
-        const res = await fetch("http://localhost:3001/api/jobs");
+        const res = await fetch(`${API_BASE}/jobs`);
         const data = await res.json();
         setJobs(Array.isArray(data) ? data : []);
       } catch (err) {

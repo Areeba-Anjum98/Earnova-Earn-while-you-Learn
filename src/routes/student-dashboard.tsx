@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { API_BASE } from "@/lib/config";
 import {
   Briefcase,
   Clock,
@@ -42,7 +43,7 @@ function StudentDashboard() {
 
   const loadWallet = async (token: string) => {
     try {
-      const res = await fetch("http://localhost:3001/api/wallet", {
+      const res = await fetch(`${API_BASE}/wallet`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to load wallet");
@@ -64,7 +65,7 @@ function StudentDashboard() {
 
   const loadSessions = async (userId: string, token: string) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/work/${userId}`, {
+      const res = await fetch(`${API_BASE}/work/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -91,13 +92,13 @@ function StudentDashboard() {
     setUser(parsedUser);
 
     // Load jobs
-    fetch("http://localhost:3001/api/jobs")
+    fetch(`${API_BASE}/jobs`)
       .then((r) => r.json())
       .then((data) => setJobs(Array.isArray(data) ? data : []))
       .catch(console.error);
 
     // Load my applications
-    fetch("http://localhost:3001/api/application", {
+    fetch(`${API_BASE}/application`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -114,7 +115,7 @@ function StudentDashboard() {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:3001/api/notifications/unread/count", {
+      const res = await fetch(`${API_BASE}/notifications/unread/count`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -128,7 +129,7 @@ function StudentDashboard() {
     const token = localStorage.getItem("token");
     if (!token) return;
     try {
-      const res = await fetch("http://localhost:3001/api/notifications", {
+      const res = await fetch(`${API_BASE}/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -143,7 +144,7 @@ function StudentDashboard() {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:3001/api/notifications/all/read", {
+      const res = await fetch(`${API_BASE}/notifications/all/read`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -171,7 +172,7 @@ function StudentDashboard() {
     }
     setApplyingId(jobId);
     try {
-      const res = await fetch("http://localhost:3001/api/application", {
+      const res = await fetch(`${API_BASE}/application`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

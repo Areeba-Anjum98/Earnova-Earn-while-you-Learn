@@ -22,14 +22,7 @@ const app = express();
 // ✅ FIX: Proper CORS config for frontend
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:5173",
-      "http://localhost:4173",
-      "http://localhost:8080",
-      "http://127.0.0.1:8080",
-      "http://127.0.0.1:3001",
-    ],
+    origin: true,
     credentials: true,
   }),
 );
