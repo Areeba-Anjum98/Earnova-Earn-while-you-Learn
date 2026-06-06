@@ -39,8 +39,7 @@ function Index() {
     const fetchJobs = async () => {
       try {
         setLoadingJobs(true);
-        // const res = await fetch("http://localhost:3001/api/jobs");
-        const res = await fetch("/api/jobs");
+        const res = await fetch("http://localhost:3001/api/jobs");
         const data = await res.json();
         setJobs(Array.isArray(data) ? data : []);
       } catch (err) {
