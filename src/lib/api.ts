@@ -1,4 +1,4 @@
-const BASE = `${(import.meta.env.VITE_API_URL as string) || 'http://localhost:3001'}/api`;
+const BASE = `https://earnova-earn-while-you-learn-production.up.railway.app/api`;
 
 // ✅ FIX: Helper to get auth headers
 const authHeaders = () => {
